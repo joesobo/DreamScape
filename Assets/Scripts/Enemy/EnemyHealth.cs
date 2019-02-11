@@ -8,8 +8,11 @@ public class EnemyHealth : MonoBehaviour {
     public GameObject destroyEffect;
     private RoundHandler roundHandler;
 
+    private CameraShake shake;
+
     private void Awake()
     {
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<CameraShake>();
         roundHandler = FindObjectOfType<RoundHandler>();
     }
 
@@ -22,6 +25,8 @@ public class EnemyHealth : MonoBehaviour {
     {
         if(health <= 0)
         {
+            shake.CamShake();
+
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
             //update roundHandler
