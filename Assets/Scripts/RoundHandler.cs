@@ -7,7 +7,7 @@ public class RoundHandler : MonoBehaviour {
 
     public GameObject enemy;
 
-    private int wave;
+    public int wave;
 
     public SideSpawners portalSpawner;
     private List<GameObject> portalList;
@@ -17,11 +17,11 @@ public class RoundHandler : MonoBehaviour {
 
     private bool breaker = false;
 
-    private bool inWave;
+    public bool inWave;
 
     public int enemiesLeft = 0;
     private int enemiesInRound = 0;
-    private int[] waveNumbers = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21};
+    private int[] waveNumbers = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
     public GameObject updatePolygon;
 
@@ -49,13 +49,19 @@ public class RoundHandler : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Y) && !inWave)
         {
             Debug.Log("Start Wave");
+            inWave = true;
             startRound();
+
+            foreach(GameObject portal in portalList)
+            {
+                PortalSpread portalSpread = portal.GetComponent<PortalSpread>();
+                portalSpread.startSpread();
+            }
         }
     }
 
     private void startRound()
     {
-        inWave = true;
         enemiesInRound = waveNumbers[wave];
 
         int enemiesSpawned = 0;

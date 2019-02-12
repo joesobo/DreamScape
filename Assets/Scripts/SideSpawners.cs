@@ -24,7 +24,7 @@ public class SideSpawners : MonoBehaviour {
                 if (numSpawners < maxSpawners && Random.Range(0, 4) == 0)
                 {
                     //left side
-                    if ((i-1) % 5 == 0 && i != first && i != second)
+                    if (i % 5 == 0 && i != first && i != second)
                     {
                         portalList.Add(Instantiate(portalPrefab, new Vector3(-36.75f, rooms[i].transform.position.y, 0), Quaternion.identity));
                         numSpawners++;
@@ -42,7 +42,7 @@ public class SideSpawners : MonoBehaviour {
                         }
                     }
                     //right side
-                    else if (i % 5 == 0 && i != first && i != second)
+                    else if ((i+1) % 5 == 0 && i != first && i != second)
                     {
                         portalList.Add(Instantiate(portalPrefab, new Vector3(36.75f, rooms[i].transform.position.y, 0), Quaternion.identity));
                         numSpawners++;

@@ -6932,7 +6932,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpawners: 3
-  portalPrefab: {fileID: 1113182836612202, guid: c72d00e7a92d8354099e8ab7793c7790,
+  portalPrefab: {fileID: 3663737676945416855, guid: c72d00e7a92d8354099e8ab7793c7790,
     type: 3}
   portalList: []
 --- !u!4 &1173249688
