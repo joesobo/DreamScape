@@ -447,9 +447,9 @@ public class RoomGenerator : MonoBehaviour {
     //initializes rooms at positions
     private void spawnRooms()
     {
-        for(int x = 0; x <= 4; x++)
+        for(int y = 0; y <= 4; y++)
         {
-            for(int y = 0; y <= 4; y++)
+            for(int x = 0; x <= 4; x++)
             {
                 Vector3 pos = pointArray[(y*5) + x].transform.position;
                 int index = indexArray[y].num[x];
