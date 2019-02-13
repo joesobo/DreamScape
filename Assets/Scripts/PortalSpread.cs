@@ -8,7 +8,7 @@ public class PortalSpread : MonoBehaviour
     private RoundHandler roundHandler;
 
     private int minRange = 0;
-    public int maxRange = 1;
+    private int maxRange = 1;
     private int wave;
     private bool inWave;
 
@@ -17,8 +17,13 @@ public class PortalSpread : MonoBehaviour
     public int maxY;
     public int minY;
 
+    public float speed = 1;
+
     private List<GameObject> maskList = new List<GameObject>();
-    public List<Vector3> pointsList;
+    private List<Vector3> pointsList;
+
+    private float parentXScale;
+    private float parentYScale;
 
     private void Start()
     {
@@ -26,12 +31,21 @@ public class PortalSpread : MonoBehaviour
 
         //find all points in range (in border and between min and max)
         pointsList = findAllPoints(this.transform.position);
+        //parentXScale = GetComponentInParent<Transform>().localScale.x;
+        //parentYScale = GetComponentInParent<Transform>().localScale.y;
+
+        //initialSpawn();
     }
 
     private void Update()
     {
         wave = roundHandler.wave;
         inWave = roundHandler.inWave;
+
+        if (inWave)
+        {
+            //RandomGrow();
+        }
     }
 
     private bool insideBorder(Vector3 pos)
@@ -104,5 +118,27 @@ public class PortalSpread : MonoBehaviour
 
             Invoke("RandomSpawn", 1);
         }
+    }
+
+    private void RandomGrow()
+    {
+        float scale = maskList[0].transform.localScale.x;
+        scale += 0.00083333f;
+        maskList[0].transform.localScale = new Vector3(scale * parentXScale, scale * parentYScale, 1);
+    }
+
+    private void initialSpawn()
+    {
+        int randMask = Random.Range(0, spriteMasks.Length);
+
+        //initialize and add to list for use later
+        GameObject go = Instantiate(spriteMasks[randMask], this.transform.position, Quaternion.identity);
+        maskList.Add(go);
+
+        //set to random size
+        int randomSize = Random.Range(5, 10);
+        go.transform.localScale = new Vector3(randomSize, randomSize, 1);
+
+        go.transform.parent = transform;
     }
 }

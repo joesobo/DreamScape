@@ -94,7 +94,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteMasks:
   - {fileID: 1367489843321328, guid: d685509ca09d64740ba01cd891e72da4, type: 3}
+  - {fileID: 5183545569596578426, guid: 5356c413c5172394ea5af4443d853cf2, type: 3}
+  - {fileID: 6574711430067285310, guid: 1cc4f8573e9033946880742ee7d5db62, type: 3}
+  - {fileID: 1618486014280006939, guid: f2919850183f55648ad932b5bed39229, type: 3}
+  - {fileID: 5697404216525079806, guid: ed3aa37bba7864043a281ab65c5b9d45, type: 3}
   maxX: 38
   minX: -38
   maxY: 38
   minY: -38
+  speed: 10000
