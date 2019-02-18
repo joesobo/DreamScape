@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
-        moveInput = Input.GetAxis("Horizontal");
+        moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
         if (moveInput > 0)
@@ -56,28 +56,16 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
-        if (isGrounded == true)
+        if(isGrounded && Input.GetKeyDown(KeyCode.W))
         {
-            extraJumps = numJumps;
-        }
-
-        if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
-        {
-            isJumping = true;
             jumpTimeCounter = jumpTime;
-            rb.velocity = Vector2.up * jumpForce;
-            extraJumps--;
-        }
-        else if (Input.GetKeyDown(KeyCode.W) && extraJumps == 0 && isGrounded)
-        {
             isJumping = true;
-            jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
         }
 
         if (Input.GetKey(KeyCode.W) && isJumping)
         {
-            if (jumpTimeCounter > 0)
+            if(jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
@@ -91,8 +79,45 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyUp(KeyCode.W))
         {
             isJumping = false;
-            jumpTimeCounter = jumpTime;
         }
+
+        //if (isGrounded == true)
+        //{
+        //    extraJumps = numJumps;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
+        //{
+        //    isJumping = true;
+        //    jumpTimeCounter = jumpTime;
+        //    rb.velocity = Vector2.up * jumpForce;
+        //    extraJumps--;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.W) && extraJumps == 0 && isGrounded)
+        //{
+        //    isJumping = true;
+        //    jumpTimeCounter = jumpTime;
+        //    rb.velocity = Vector2.up * jumpForce;
+        //}
+
+        //if (Input.GetKey(KeyCode.W) && isJumping)
+        //{
+        //    if (jumpTimeCounter > 0)
+        //    {
+        //        rb.velocity = Vector2.up * jumpForce;
+        //        jumpTimeCounter -= Time.deltaTime;
+        //    }
+        //    else
+        //    {
+        //        isJumping = false;
+        //    }
+        //}
+
+        //if (Input.GetKeyUp(KeyCode.W))
+        //{
+        //    isJumping = false;
+        //    jumpTimeCounter = jumpTime;
+        //}
     }
 
     public void unlock(){

@@ -34,7 +34,7 @@ public class PortalSpread : MonoBehaviour
         //parentXScale = GetComponentInParent<Transform>().localScale.x;
         //parentYScale = GetComponentInParent<Transform>().localScale.y;
 
-        //initialSpawn();
+        //  initialSpawn();
     }
 
     private void Update()
