@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour {
     private int extraJumps;
 
     private float jumpTimeCounter;
-    public float jumpTime;
-    private bool isJumping;
+    public float jumpTime = 0.35f;
+    private bool isJumping = false;
 
     public bool unlocker = false;
 
@@ -56,15 +56,26 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
-        if(isGrounded && Input.GetKeyDown(KeyCode.W))
+        if (isGrounded)
         {
+            isJumping = false;
+            extraJumps = numJumps;
+        }
+
+
+        if(Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
+        {
+            Debug.Log("Jump");
             jumpTimeCounter = jumpTime;
             isJumping = true;
             rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
         }
 
-        if (Input.GetKey(KeyCode.W) && isJumping)
+        //adds delay to jump based on length of press
+        if (Input.GetKey(KeyCode.Space))
         {
+            Debug.Log("Glide");
             if(jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
@@ -76,7 +87,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
         }
