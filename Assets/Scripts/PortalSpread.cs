@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PortalSpread : MonoBehaviour
 {
+    public GameObject circleMask;
     public GameObject[] spriteMasks;
     private RoundHandler roundHandler;
 
@@ -25,27 +26,22 @@ public class PortalSpread : MonoBehaviour
     private float parentXScale;
     private float parentYScale;
 
+    private GameObject circleMaskObject;
+
     private void Start()
     {
         roundHandler = GameObject.FindObjectOfType<RoundHandler>();
 
         //find all points in range (in border and between min and max)
         pointsList = findAllPoints(this.transform.position);
-        //parentXScale = GetComponentInParent<Transform>().localScale.x;
-        //parentYScale = GetComponentInParent<Transform>().localScale.y;
 
-        //  initialSpawn();
+        initialSpawn();
     }
 
     private void Update()
     {
         wave = roundHandler.wave;
         inWave = roundHandler.inWave;
-
-        if (inWave)
-        {
-            //RandomGrow();
-        }
     }
 
     private bool insideBorder(Vector3 pos)
@@ -79,15 +75,16 @@ public class PortalSpread : MonoBehaviour
 
     public void startSpread()
     {
-        Invoke("RandomSpawn", 1);
+        Invoke("RandomSpawn", 5);
     }
 
     private void RandomSpawn()
     {
         if (inWave)
         {
-            for (int i = 0; i < wave + 1; i++)
+            for (int i = 0; i < (wave + 1) * 5; i++)
             {
+                
                 if (pointsList.Count != 0)
                 {
                     //get random point from list and remove it
@@ -106,6 +103,11 @@ public class PortalSpread : MonoBehaviour
                     go.transform.localScale = new Vector3(randomSize, randomSize, 1);
 
                     go.transform.parent = transform;
+
+                    if(pointsList.Count == 0)
+                    {
+                        expandCircle();
+                    }
                 }
                 else
                 {
@@ -116,29 +118,22 @@ public class PortalSpread : MonoBehaviour
                 }
             }
 
-            Invoke("RandomSpawn", 1);
+            Invoke("RandomSpawn", 5);
         }
-    }
-
-    private void RandomGrow()
-    {
-        float scale = maskList[0].transform.localScale.x;
-        scale += 0.00083333f;
-        maskList[0].transform.localScale = new Vector3(scale * parentXScale, scale * parentYScale, 1);
     }
 
     private void initialSpawn()
     {
-        int randMask = Random.Range(0, spriteMasks.Length);
+        circleMaskObject = Instantiate(circleMask, transform.position, Quaternion.identity);
+    }
 
-        //initialize and add to list for use later
-        GameObject go = Instantiate(spriteMasks[randMask], this.transform.position, Quaternion.identity);
-        maskList.Add(go);
+    private void expandCircle()
+    {
+        foreach(GameObject go in maskList)
+        {
+            Destroy(go);
+        }
 
-        //set to random size
-        int randomSize = Random.Range(5, 10);
-        go.transform.localScale = new Vector3(randomSize, randomSize, 1);
-
-        go.transform.parent = transform;
+        circleMaskObject.transform.localScale = new Vector3(maxRange, maxRange, maxRange);
     }
 }

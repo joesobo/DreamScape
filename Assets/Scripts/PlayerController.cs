@@ -63,9 +63,8 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        if(Input.GetKeyDown(KeyCode.Space) && extraJumps > 0)
+        if(Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
         {
-            Debug.Log("Jump");
             jumpTimeCounter = jumpTime;
             isJumping = true;
             rb.velocity = Vector2.up * jumpForce;
@@ -73,9 +72,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         //adds delay to jump based on length of press
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("Glide");
             if(jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
@@ -87,48 +85,10 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.W))
         {
             isJumping = false;
         }
-
-        //if (isGrounded == true)
-        //{
-        //    extraJumps = numJumps;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
-        //{
-        //    isJumping = true;
-        //    jumpTimeCounter = jumpTime;
-        //    rb.velocity = Vector2.up * jumpForce;
-        //    extraJumps--;
-        //}
-        //else if (Input.GetKeyDown(KeyCode.W) && extraJumps == 0 && isGrounded)
-        //{
-        //    isJumping = true;
-        //    jumpTimeCounter = jumpTime;
-        //    rb.velocity = Vector2.up * jumpForce;
-        //}
-
-        //if (Input.GetKey(KeyCode.W) && isJumping)
-        //{
-        //    if (jumpTimeCounter > 0)
-        //    {
-        //        rb.velocity = Vector2.up * jumpForce;
-        //        jumpTimeCounter -= Time.deltaTime;
-        //    }
-        //    else
-        //    {
-        //        isJumping = false;
-        //    }
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.W))
-        //{
-        //    isJumping = false;
-        //    jumpTimeCounter = jumpTime;
-        //}
     }
 
     public void unlock(){
