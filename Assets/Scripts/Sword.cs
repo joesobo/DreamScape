@@ -7,19 +7,28 @@ public class Sword : MonoBehaviour
     private bool isRot = false;
     private Vector3 startRot;
 
-    private int speed = 1000;
+    public int speed = 10;
+    public GameObject attackParticle;
+
+    private void Start()
+    {
+        startRot = this.transform.localEulerAngles;
+    }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            startRot = this.transform.localEulerAngles;
             isRot = true;
         }
 
         if (isRot)
         {
             rotateSword();
+        }
+
+        if((this.transform.localEulerAngles.z < 25)){
+            Instantiate(attackParticle, this.transform.position, Quaternion.identity);
         }
 
         if (this.transform.localEulerAngles.z < startRot.z && this.transform.localEulerAngles.z > 150)
@@ -31,6 +40,6 @@ public class Sword : MonoBehaviour
 
     private void rotateSword()
     {
-        this.transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
+        this.transform.Rotate(new Vector3(0, 0, 100 * speed * Time.deltaTime));
     }
 }
