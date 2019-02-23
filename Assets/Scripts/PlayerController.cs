@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //adds delay to jump based on length of press
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && extraJumps >= 0)
         {
             if(jumpTimeCounter > 0)
             {
