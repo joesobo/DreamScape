@@ -8,11 +8,19 @@ Import all files into Unity Hub and restart
 
 ## Usage
 
+Controls for Player
+
 * a/d         - move left/right
 * f           - start wave
 * space       - jump
 * right click - shoot at point
 * arrow keys  - attack in direction
+
+## Future
+
+Diagrams of project planning
+* Game Design (https://coggle.it/diagram/XHb9IzAdFH93E5XD/t/-)
+* Main Design (https://coggle.it/diagram/XHbhI39tHUDGGeN_/t/dreamscape)
 
 ### Authors
 
@@ -25,8 +33,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ### Acknowledgments
 
 * Hat tip to
-	* BlackThornProd
-	* Brakeys
+	* Blackthornprod
+	* Brackeys
+	* ThinMatrix
 * Inspiration
 	* HollowKnight
 
