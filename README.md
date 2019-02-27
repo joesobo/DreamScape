@@ -1,5 +1,4 @@
-# Dream Scape - 
-## V 1.0
+# Dream Scape - V 1.0
 
 A small 2d platformer created in Unity
 
