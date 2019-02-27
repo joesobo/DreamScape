@@ -8,15 +8,15 @@ Import all files into Unity Hub and restart
 
 ## Usage
 
-a/d         - move left/right
-f           - start wave
-space       - jump
-right click - shoot at point
-arrow keys  - attack in direction
+* a/d         - move left/right
+* f           - start wave
+* space       - jump
+* right click - shoot at point
+* arrow keys  - attack in direction
 
 ### Authors
 
-* **Joe Soboleski** - *Initial work* - [JoeSobo](https://github.com/joesobo)
+* **Joe Soboleski** - *Code / Design / Art* - [JoeSobo](https://github.com/joesobo)
 
 ### License
 
@@ -25,8 +25,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ### Acknowledgments
 
 * Hat tip to
-	** BlackThornProd
-	** Brakeys
+	* BlackThornProd
+	* Brakeys
 * Inspiration
-	** HollowKnight
+	* HollowKnight
 
