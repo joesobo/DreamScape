@@ -11,10 +11,10 @@ Import all files into Unity Hub and restart
 Controls for Player
 
 * a/d         - move left/right
+* w           - jump
 * f           - start wave
-* space       - jump
-* right click - shoot at point
-* arrow keys  - attack in direction
+* space	      - shoot dream at infection (TODO)
+* arrow keys  - attack in direction (TODO)
 
 ## Future
 
