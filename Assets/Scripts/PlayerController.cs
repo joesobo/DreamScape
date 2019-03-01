@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour {
     private bool jump1 = false;
     private bool jump2 = false;
 
+    public GameObject groundHitParticle;
+    private bool groundHitCheck = false;
+
     private void Awake()
     {
         anim = GetComponentInChildren<Animator>();
@@ -81,6 +84,12 @@ public class PlayerController : MonoBehaviour {
         //check if on ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
+        if(groundHitCheck && isGrounded)
+        {
+            Instantiate(groundHitParticle, new Vector3(transform.position.x, transform.position.y-.5f, transform.position.z), Quaternion.identity);
+            groundHitCheck = false;
+        }
+
         if (isGrounded)
         {
             jump1 = false;
@@ -91,13 +100,14 @@ public class PlayerController : MonoBehaviour {
         }
         else
         {
+            groundHitCheck = true;
             anim.SetBool("isJumping", true);
         }
 
         //first jump
         if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
-            Debug.Log("Jump 1");
+            //Debug.Log("Jump 1");
             anim.SetTrigger("takeoff");
             jumpTimeCounter = jumpTime;
             isJumping = true;
@@ -108,7 +118,7 @@ public class PlayerController : MonoBehaviour {
         //extra jumps
         if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0 && !isGrounded)
         {
-            Debug.Log("Jump 2");
+            //Debug.Log("Jump 2");
             anim.SetTrigger("takeoff");
             jumpTimeCounter2 = jumpTime;
             rb.velocity = Vector2.up * jumpForce;
@@ -120,7 +130,7 @@ public class PlayerController : MonoBehaviour {
         //adds delay to first jump based on length of press
         if (Input.GetKey(KeyCode.W) && isJumping && jump1)
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             if (jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
@@ -135,7 +145,7 @@ public class PlayerController : MonoBehaviour {
         //adds delay to second jump based on length of press
         if (Input.GetKey(KeyCode.W) && !isGrounded && jump2)
         {
-            Debug.Log("2");
+            //Debug.Log("2");
             if (jumpTimeCounter2 > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
