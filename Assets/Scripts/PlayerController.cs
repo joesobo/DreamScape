@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     private bool jump2 = false;
 
     public GameObject groundHitParticle;
+    public GameObject runGroundParticle;
     private bool groundHitCheck = false;
 
     private void Awake()
@@ -97,6 +98,11 @@ public class PlayerController : MonoBehaviour {
             isJumping = false;
             extraJumps = numJumps;
             anim.SetBool("isJumping", false);
+
+            if(Input.GetAxisRaw("Horizontal") != 0)
+            {
+                Instantiate(runGroundParticle, new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z), Quaternion.identity);
+            }
         }
         else
         {
