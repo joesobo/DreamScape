@@ -105,3 +105,5 @@ MonoBehaviour:
   maxY: 38
   minY: -38
   speed: 10000
+  infectionEffect: {fileID: 7681286135126538929, guid: be686bd350688e1479922f96945ea831,
+    type: 3}

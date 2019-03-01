@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
         if(groundHitCheck && isGrounded)
         {
-            Instantiate(groundHitParticle, new Vector3(transform.position.x, transform.position.y-.5f, transform.position.z), Quaternion.identity);
+            Instantiate(groundHitParticle, new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z), Quaternion.identity);
             groundHitCheck = false;
         }
 

@@ -28,6 +28,8 @@ public class PortalSpread : MonoBehaviour
 
     private GameObject circleMaskObject;
 
+    public GameObject infectionEffect;
+
     private void Start()
     {
         roundHandler = GameObject.FindObjectOfType<RoundHandler>();
@@ -135,5 +137,7 @@ public class PortalSpread : MonoBehaviour
         }
 
         circleMaskObject.transform.localScale = new Vector3(maxRange, maxRange, maxRange);
+        GameObject g = Instantiate(infectionEffect, transform.position, Quaternion.identity);
+        g.transform.localScale = new Vector3(maxRange/2, maxRange/2, maxRange/2);
     }
 }

@@ -48,7 +48,7 @@ public class RoundHandler : MonoBehaviour {
         }
 
         //start wave
-        if (Input.GetKeyDown(KeyCode.Y) && !inWave)
+        if (Input.GetKeyDown(KeyCode.F) && !inWave)
         {
             Debug.Log("Start Wave");
             inWave = true;
