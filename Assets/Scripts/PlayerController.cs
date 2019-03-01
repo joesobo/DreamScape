@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
 
-    private bool isGrounded;
+    public bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
@@ -19,13 +19,22 @@ public class PlayerController : MonoBehaviour {
     private int extraJumps;
 
     private float jumpTimeCounter;
+    private float jumpTimeCounter2;
     public float jumpTime = 0.35f;
     private bool isJumping = false;
 
     public bool unlocker = false;
 
+    private Animator anim;
+    private Transform childTransform;
+
+    private bool jump1 = false;
+    private bool jump2 = false;
+
     private void Awake()
     {
+        anim = GetComponentInChildren<Animator>();
+        childTransform = gameObject.transform.Find("Player Body").GetComponent<Transform>();
         extraJumps = numJumps;
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -33,20 +42,33 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-
+        //left/right move input
         moveInput = Input.GetAxisRaw("Horizontal");
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
 
+        //running animation
+        if(moveInput == 0)
+        {
+            anim.SetBool("isRunning", false);
+        }
+        else
+        {
+            anim.SetBool("isRunning", true);
+        }
+
+        //flips character
         if (moveInput > 0)
         {
-            transform.eulerAngles = Vector3.zero;
+            //transform.eulerAngles = Vector3.zero;
+            transform.localScale = new Vector3(1, 1, 1);
         }
         else if (moveInput < 0)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
+        //unlocks character movement
         if (unlocker)
         {
             unlock();
@@ -56,25 +78,50 @@ public class PlayerController : MonoBehaviour {
 
     private void Update()
     {
+        //check if on ground
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+
         if (isGrounded)
         {
+            jump1 = false;
+            jump2 = false;
             isJumping = false;
             extraJumps = numJumps;
+            anim.SetBool("isJumping", false);
+        }
+        else
+        {
+            anim.SetBool("isJumping", true);
         }
 
-
-        if(Input.GetKeyDown(KeyCode.W) && extraJumps > 0)
+        //first jump
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
+            Debug.Log("Jump 1");
+            anim.SetTrigger("takeoff");
             jumpTimeCounter = jumpTime;
             isJumping = true;
             rb.velocity = Vector2.up * jumpForce;
-            extraJumps--;
-        }
+            jump1 = true;
+        }        
 
-        //adds delay to jump based on length of press
-        if (Input.GetKey(KeyCode.W) && extraJumps >= 0)
+        //extra jumps
+        if (Input.GetKeyDown(KeyCode.W) && extraJumps > 0 && !isGrounded)
         {
-            if(jumpTimeCounter > 0)
+            Debug.Log("Jump 2");
+            anim.SetTrigger("takeoff");
+            jumpTimeCounter2 = jumpTime;
+            rb.velocity = Vector2.up * jumpForce;
+            extraJumps--;
+            jump2 = true;
+        }
+        
+
+        //adds delay to first jump based on length of press
+        if (Input.GetKey(KeyCode.W) && isJumping && jump1)
+        {
+            Debug.Log("1");
+            if (jumpTimeCounter > 0)
             {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
@@ -85,9 +132,25 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        //adds delay to second jump based on length of press
+        if (Input.GetKey(KeyCode.W) && !isGrounded && jump2)
+        {
+            Debug.Log("2");
+            if (jumpTimeCounter2 > 0)
+            {
+                rb.velocity = Vector2.up * jumpForce;
+                jumpTimeCounter2 -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
         if (Input.GetKeyUp(KeyCode.W))
         {
             isJumping = false;
+            jump1 = false;
         }
     }
 

@@ -37,11 +37,13 @@ public class RoundHandler : MonoBehaviour {
         //unlock character
         if (roomGenerator.doneGenerating && !breaker)
         {
+            //updates Astar path for enemies with new rooms components
             AstarPath.active.UpdateGraphs(updatePolygon.GetComponent<PolygonCollider2D>().bounds);
 
             //unlock player movement
             playerController.unlocker = true;
 
+            //stops repeated updating of astar graphs
             breaker = true;
         }
 
