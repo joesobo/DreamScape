@@ -8,6 +8,7 @@ public class HealthController : MonoBehaviour {
     public int maxHealth;
 
     public GameObject healthCanvas;
+    public GameObject playerHit;
 
     private void Start()
     {
@@ -29,5 +30,11 @@ public class HealthController : MonoBehaviour {
             healthCanvas.transform.GetChild(3).GetComponent<Image>().enabled = false;
             Destroy(gameObject);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Instantiate(playerHit, transform.position, Quaternion.identity);
     }
 }

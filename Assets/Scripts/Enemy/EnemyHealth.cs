@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour {
 
     public int health;
+    public GameObject hitEffect;
     public GameObject destroyEffect;
     private RoundHandler roundHandler;
 
@@ -19,14 +20,14 @@ public class EnemyHealth : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         health -= damage;
+        shake.CamShake();
+        Instantiate(destroyEffect, transform.position, Quaternion.identity);
     }
 
     private void Update()
     {
         if(health <= 0)
         {
-            shake.CamShake();
-
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
 
             //update roundHandler

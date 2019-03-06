@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 114799785817660286}
   - component: {fileID: 114932200164966632}
   - component: {fileID: 114547658579903066}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: A_FlyingEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -145,7 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  destroyEffect: {fileID: 1198331414725570, guid: 3dded61c924fffb40bbc716c0009eb17,
+  hitEffect: {fileID: 1198331414725570, guid: 3dded61c924fffb40bbc716c0009eb17, type: 3}
+  destroyEffect: {fileID: 3255217763900977705, guid: b042ea4f495744246b8dab95f6b54341,
     type: 3}
 --- !u!114 &114799785817660286
 MonoBehaviour:
