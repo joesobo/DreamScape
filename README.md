@@ -12,9 +12,9 @@ Controls for Player
 
 * a/d         - move left/right
 * w           - jump
-* f           - start wave
+* i           - start wave
 * space	      - shoot dream at infection (TODO)
-* arrow keys  - attack in direction (TODO)
+* arrow keys  - attack in direction
 
 ## Future
 
