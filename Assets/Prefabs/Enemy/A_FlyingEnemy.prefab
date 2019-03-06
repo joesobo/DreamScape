@@ -128,7 +128,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: f173523b2ee8b7848bff68c2fd24e95e, type: 2}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -194,6 +194,8 @@ MonoBehaviour:
   fMode: 0
   pathIsEnded: 0
   nextWaypointDist: 2
+  dazedTime: 0
+  startDazedTime: 1
 --- !u!114 &114547658579903066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,5 +208,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278e377f72e89574790cc861458c2319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBlood: {fileID: 3255217763900977705, guid: b042ea4f495744246b8dab95f6b54341,
-    type: 3}

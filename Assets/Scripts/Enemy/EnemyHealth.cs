@@ -11,10 +11,13 @@ public class EnemyHealth : MonoBehaviour {
 
     private CameraShake shake;
 
+    private EnemyAI enemyAI;
+
     private void Awake()
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<CameraShake>();
         roundHandler = FindObjectOfType<RoundHandler>();
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     public void TakeDamage(int damage)
@@ -22,6 +25,7 @@ public class EnemyHealth : MonoBehaviour {
         health -= damage;
         shake.CamShake();
         Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        enemyAI.dazedTime = enemyAI.startDazedTime;
     }
 
     private void Update()

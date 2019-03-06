@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    public float knockBackForce;
+
     private float timeBtwAttack;
     public float startTimeBtwAttack;
 
@@ -21,6 +24,11 @@ public class PlayerAttack : MonoBehaviour
 
     private Collider2D[] enemiesToDamage;
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         if(timeBtwAttack <= 0)
@@ -31,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(LattackParticle, LRAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
+                rb.velocity = Vector2.right * knockBackForce;
             }
 
             //right arrow key and looking to left
@@ -39,6 +48,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(RattackParticle, LRAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
+                rb.velocity = Vector2.left * knockBackForce;
             }
 
             //up arrow key
@@ -47,6 +57,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(UAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(UattackParticle, UAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
+                rb.velocity = Vector2.down * knockBackForce;
             }
 
             //down arrow key
@@ -55,6 +66,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(DAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(DattackParticle, DAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
+                rb.velocity = Vector2.up * knockBackForce;
             }
 
             if (enemiesToDamage != null)

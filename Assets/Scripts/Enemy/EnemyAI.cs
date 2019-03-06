@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour {
     public Path path;
 
     //the AI speed per second
-    public float speed = 300f;
+    public float speed;
     public ForceMode2D fMode;
 
     [HideInInspector]
@@ -31,6 +31,9 @@ public class EnemyAI : MonoBehaviour {
 
     //the waypoint we are currently moving towards
     private int currentWaypoint = 0;
+
+    public float dazedTime = 0;
+    public float startDazedTime;
 
     private void Start()
     {
@@ -105,11 +108,24 @@ public class EnemyAI : MonoBehaviour {
                 pathIsEnded = true;
                 return;
             }
+
             pathIsEnded = false;
+
+            //add daze if hit (pause character)
+            int setSpeed = 1;
+            if(dazedTime <= 0)
+            {
+                setSpeed = (int)speed;
+            }
+            else
+            {
+                setSpeed = 0;
+                dazedTime -= Time.deltaTime;
+            }
 
             //direction to next waypoint
             Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-            dir *= speed * Time.fixedDeltaTime;
+            dir *= setSpeed * Time.fixedDeltaTime;
 
             //move AI
             rb.AddForce(dir, fMode);
