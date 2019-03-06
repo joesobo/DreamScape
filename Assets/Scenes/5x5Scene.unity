@@ -2720,9 +2720,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a114e8bdc4ef03540889267b776e3309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 500
+  knockBackForce: 1000
   startTimeBtwAttack: 0.3
-  LRAttackPos: {fileID: 1092148313}
+  RAttackPos: {fileID: 1935118875}
+  LAttackPos: {fileID: 1092148313}
   UAttackPos: {fileID: 1854975088}
   DAttackPos: {fileID: 1444197814}
   whatIsEnemy:
@@ -6332,7 +6333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092148312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1616814213}
@@ -11422,7 +11423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935118874}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1616814213}
