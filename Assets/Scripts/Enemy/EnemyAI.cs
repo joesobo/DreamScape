@@ -35,6 +35,8 @@ public class EnemyAI : MonoBehaviour {
     public float dazedTime = 0;
     public float startDazedTime;
 
+    public Vector3 dir;
+
     private void Start()
     {
         target = GameObject.FindGameObjectsWithTag("Player")[0].transform;
@@ -124,7 +126,7 @@ public class EnemyAI : MonoBehaviour {
             }
 
             //direction to next waypoint
-            Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+            dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
             dir *= setSpeed * Time.fixedDeltaTime;
 
             //move AI

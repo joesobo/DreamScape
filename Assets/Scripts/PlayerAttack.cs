@@ -10,7 +10,8 @@ public class PlayerAttack : MonoBehaviour
     private float timeBtwAttack;
     public float startTimeBtwAttack;
 
-    public Transform LRAttackPos;
+    public Transform RAttackPos;
+    public Transform LAttackPos;
     public Transform UAttackPos;
     public Transform DAttackPos;
     public LayerMask whatIsEnemy;
@@ -36,8 +37,16 @@ public class PlayerAttack : MonoBehaviour
             //left arrow key and looking to left
             if (Input.GetKeyDown(KeyCode.LeftArrow) /*&& transform.localScale.x == -1*/)
             {
-                enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
-                Instantiate(LattackParticle, LRAttackPos.position, Quaternion.identity);
+                if(transform.localScale.x == 1)
+                {
+                    enemiesToDamage = Physics2D.OverlapCircleAll(LAttackPos.position, attackRange, whatIsEnemy);
+                    Instantiate(LattackParticle, LAttackPos.position, Quaternion.identity);
+                }
+                else
+                {
+                    enemiesToDamage = Physics2D.OverlapCircleAll(RAttackPos.position, attackRange, whatIsEnemy);
+                    Instantiate(RattackParticle, RAttackPos.position, Quaternion.identity);
+                }
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(knockBackForce, 0));
             }
@@ -45,8 +54,16 @@ public class PlayerAttack : MonoBehaviour
             //right arrow key and looking to left
             if (Input.GetKeyDown(KeyCode.RightArrow) /*&& transform.localScale.x == 1*/)
             {
-                enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
-                Instantiate(RattackParticle, LRAttackPos.position, Quaternion.identity);
+                if (transform.localScale.x == 1)
+                {
+                    enemiesToDamage = Physics2D.OverlapCircleAll(RAttackPos.position, attackRange, whatIsEnemy);
+                    Instantiate(RattackParticle, RAttackPos.position, Quaternion.identity);
+                }
+                else
+                {
+                    enemiesToDamage = Physics2D.OverlapCircleAll(LAttackPos.position, attackRange, whatIsEnemy);
+                    Instantiate(LattackParticle, LAttackPos.position, Quaternion.identity);
+                }
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(-knockBackForce, 0));
             }
@@ -87,7 +104,8 @@ public class PlayerAttack : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(LRAttackPos.position, attackRange);
+        Gizmos.DrawWireSphere(LAttackPos.position, attackRange);
+        Gizmos.DrawWireSphere(RAttackPos.position, attackRange);
         Gizmos.DrawWireSphere(UAttackPos.position, attackRange);
         Gizmos.DrawWireSphere(DAttackPos.position, attackRange);
     }

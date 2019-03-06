@@ -148,6 +148,7 @@ MonoBehaviour:
   hitEffect: {fileID: 1198331414725570, guid: 3dded61c924fffb40bbc716c0009eb17, type: 3}
   destroyEffect: {fileID: 3255217763900977705, guid: b042ea4f495744246b8dab95f6b54341,
     type: 3}
+  knockBackForce: 1000
 --- !u!114 &114799785817660286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +196,8 @@ MonoBehaviour:
   pathIsEnded: 0
   nextWaypointDist: 2
   dazedTime: 0
-  startDazedTime: 1
+  startDazedTime: 0.6
+  dir: {x: 0, y: 0, z: 0}
 --- !u!114 &114547658579903066
 MonoBehaviour:
   m_ObjectHideFlags: 0
