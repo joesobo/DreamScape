@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(LattackParticle, LRAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.velocity = Vector2.right * knockBackForce;
+                rb.AddForce(new Vector2(knockBackForce, 0));
             }
 
             //right arrow key and looking to left
@@ -48,7 +48,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(LRAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(RattackParticle, LRAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.velocity = Vector2.left * knockBackForce;
+                rb.AddForce(new Vector2(-knockBackForce, 0));
             }
 
             //up arrow key
@@ -57,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(UAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(UattackParticle, UAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.velocity = Vector2.down * knockBackForce;
+                rb.AddForce(new Vector2(0, -knockBackForce));
             }
 
             //down arrow key
@@ -66,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(DAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(DattackParticle, DAttackPos.position, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.velocity = Vector2.up * knockBackForce;
+                rb.AddForce(new Vector2(0, knockBackForce));
             }
 
             if (enemiesToDamage != null)
