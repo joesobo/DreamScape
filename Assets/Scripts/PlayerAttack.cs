@@ -25,9 +25,21 @@ public class PlayerAttack : MonoBehaviour
 
     private Collider2D[] enemiesToDamage;
 
+    private Vector3 RAttPos;
+    private Vector3 LAttos;
+    private Vector3 UAttPos;
+    private Vector3 DAttPos;
+
+    public int offset;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        RAttPos = new Vector3(RAttackPos.transform.position.x, RAttackPos.transform.position.y, offset);
+        LAttos = new Vector3(LAttackPos.transform.position.x, LAttackPos.transform.position.y, offset);
+        UAttPos = new Vector3(UAttackPos.transform.position.x, UAttackPos.transform.position.y, offset);
+        DAttPos = new Vector3(DAttackPos.transform.position.x, DAttackPos.transform.position.y, offset);
+
     }
 
     private void Update()
@@ -39,13 +51,15 @@ public class PlayerAttack : MonoBehaviour
             {
                 if(transform.localScale.x == 1)
                 {
+                    LAttos = new Vector3(LAttackPos.transform.position.x, LAttackPos.transform.position.y, offset);
                     enemiesToDamage = Physics2D.OverlapCircleAll(LAttackPos.position, attackRange, whatIsEnemy);
-                    Instantiate(LattackParticle, LAttackPos.position, Quaternion.identity);
+                    Instantiate(LattackParticle, LAttos, Quaternion.identity);
                 }
                 else
                 {
+                    RAttPos = new Vector3(RAttackPos.transform.position.x, RAttackPos.transform.position.y, offset);
                     enemiesToDamage = Physics2D.OverlapCircleAll(RAttackPos.position, attackRange, whatIsEnemy);
-                    Instantiate(RattackParticle, RAttackPos.position, Quaternion.identity);
+                    Instantiate(RattackParticle, RAttPos, Quaternion.identity);
                 }
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(knockBackForce, 0));
@@ -56,13 +70,15 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (transform.localScale.x == 1)
                 {
+                    RAttPos = new Vector3(RAttackPos.transform.position.x, RAttackPos.transform.position.y, offset);
                     enemiesToDamage = Physics2D.OverlapCircleAll(RAttackPos.position, attackRange, whatIsEnemy);
-                    Instantiate(RattackParticle, RAttackPos.position, Quaternion.identity);
+                    Instantiate(RattackParticle, RAttPos, Quaternion.identity);
                 }
                 else
                 {
+                    LAttos = new Vector3(LAttackPos.transform.position.x, LAttackPos.transform.position.y, offset);
                     enemiesToDamage = Physics2D.OverlapCircleAll(LAttackPos.position, attackRange, whatIsEnemy);
-                    Instantiate(LattackParticle, LAttackPos.position, Quaternion.identity);
+                    Instantiate(LattackParticle, LAttos, Quaternion.identity);
                 }
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(-knockBackForce, 0));
@@ -71,8 +87,9 @@ public class PlayerAttack : MonoBehaviour
             //up arrow key
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                UAttPos = new Vector3(UAttackPos.transform.position.x, UAttackPos.transform.position.y, offset);
                 enemiesToDamage = Physics2D.OverlapCircleAll(UAttackPos.position, attackRange, whatIsEnemy);
-                Instantiate(UattackParticle, UAttackPos.position, Quaternion.identity);
+                Instantiate(UattackParticle, UAttPos, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(0, -knockBackForce));
             }
@@ -80,8 +97,9 @@ public class PlayerAttack : MonoBehaviour
             //down arrow key
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                DAttPos = new Vector3(DAttackPos.transform.position.x, DAttackPos.transform.position.y, offset);
                 enemiesToDamage = Physics2D.OverlapCircleAll(DAttackPos.position, attackRange, whatIsEnemy);
-                Instantiate(DattackParticle, DAttackPos.position, Quaternion.identity);
+                Instantiate(DattackParticle, DAttPos, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
                 rb.AddForce(new Vector2(0, knockBackForce));
             }
