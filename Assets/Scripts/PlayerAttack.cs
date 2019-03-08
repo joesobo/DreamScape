@@ -46,7 +46,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(timeBtwAttack <= 0)
         {
-            //left arrow key and looking to left
+            //left arrow key
             if (Input.GetKeyDown(KeyCode.LeftArrow) /*&& transform.localScale.x == -1*/)
             {
                 if(transform.localScale.x == 1)
@@ -65,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
                 rb.AddForce(new Vector2(knockBackForce, 0));
             }
 
-            //right arrow key and looking to left
+            //right arrow key 
             if (Input.GetKeyDown(KeyCode.RightArrow) /*&& transform.localScale.x == 1*/)
             {
                 if (transform.localScale.x == 1)
@@ -91,7 +91,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(UAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(UattackParticle, UAttPos, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.AddForce(new Vector2(0, -knockBackForce));
+                //rb.AddForce(new Vector2(0, -knockBackForce));
             }
 
             //down arrow key
@@ -101,7 +101,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage = Physics2D.OverlapCircleAll(DAttackPos.position, attackRange, whatIsEnemy);
                 Instantiate(DattackParticle, DAttPos, Quaternion.identity);
                 timeBtwAttack = startTimeBtwAttack;
-                rb.AddForce(new Vector2(0, knockBackForce));
+                //rb.AddForce(new Vector2(0, knockBackForce));
             }
 
             if (enemiesToDamage != null)
