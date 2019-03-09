@@ -50,6 +50,9 @@ public class RoundHandler : MonoBehaviour {
         //start wave
         if (Input.GetKeyDown(KeyCode.I) && !inWave)
         {
+            //updates Astar path for enemies with new rooms components
+            AstarPath.active.UpdateGraphs(updatePolygon.GetComponent<PolygonCollider2D>().bounds);
+
             Debug.Log("Start Wave");
             inWave = true;
             startRound();
